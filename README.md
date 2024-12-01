@@ -57,4 +57,20 @@ QuizProctor is a web-based platform designed to facilitate secure MCQ (Multiple 
     JWT_SECRET=your_jwt_secret
     ```
 
+4. **Run the application:**
+    ```bash
+    # Run the backend
+    npm run server
+
+    # Run the frontend
+    cd client
+    npm run dev
+    ```
+
+5. **Access the application:**
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## Folder Structure
 
