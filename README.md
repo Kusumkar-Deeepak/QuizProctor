@@ -34,4 +34,27 @@ QuizProctor is a web-based platform designed to facilitate secure MCQ (Multiple 
 - Node.js installed on your system
 - MongoDB server running
 
+### Steps
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/quizproctor.git
+    cd quizproctor
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    npm install
+    cd client
+    npm install
+    cd ..
+    ```
+
+3. **Configure Environment Variables:**  
+   Create a `.env` file in the root directory and add the following:
+    ```env
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_jwt_secret
+    ```
+
 
