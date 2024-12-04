@@ -87,5 +87,12 @@ A major milestone was adding authentication features for the admin and teacher u
 
 For both registration and login, we used the `axios` library to handle HTTP requests and the `toast` notification library to show success or error messages based on the response from the backend. Authentication tokens are stored in `localStorage` for maintaining the user's session.
 
+**3) Made the Routes Safe**  
+To ensure the security of the application, we implemented route protection mechanisms. This ensures that only authenticated users (admin or teacher) can access certain routes, such as the admin dashboard and teacher-specific pages.
+
+- **JWT Authentication**: We used JSON Web Tokens (JWT) to manage user sessions. When users log in, a token is generated and stored in `localStorage`. This token is then used for subsequent requests to authenticate the user.
+- **Route Protection**: We added a layer of route protection by checking the presence of the JWT token before allowing users to access certain routes. If the token is not available or is invalid, users are redirected to the login page. This ensures that unauthorized users cannot access sensitive areas of the application.
+
+These improvements mark the foundational work for the project, ensuring a solid structure for the user interface and authentication system. The project is now ready for further features and enhancements as we continue to build out its functionality.
 
 
