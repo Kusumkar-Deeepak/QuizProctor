@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import AdminLogin from './pages/AdminLogin';  // Assuming you have this file
 import AdminSignup from './pages/AdminSignup';  // Assuming you have this file
 import AdminDashboard from './pages/AdminDashboard'; // Assuming you have this file
+import QuizComponent from './pages/QuizComponent';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<AdminLogin />} />
           <Route path="/register" element={<AdminSignup />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Add route for admin dashboard */}
+          <Route path="/quiz/:quizLink" element={<QuizComponent />} />
         </Routes>
       </Router>
     </AdminProvider>
