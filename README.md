@@ -96,3 +96,32 @@ To ensure the security of the application, we implemented route protection mecha
 These improvements mark the foundational work for the project, ensuring a solid structure for the user interface and authentication system. The project is now ready for further features and enhancements as we continue to build out its functionality.
 
 
+# 📚 Day 2: Admin Dashboard Development
+
+## 🛠️ Features Implemented
+
+On **Day 2**, we developed the **Admin Dashboard** for the QuizProctor project. This dashboard includes the following tabs:
+
+### 1️⃣ Home Tab
+- Displays key statistics:
+  - Total Quizzes
+  - Total Students
+  - Upcoming Quizzes
+- **Future Enhancements:** Add graphs/charts for better visualization.
+
+### 2️⃣ Recent Quizzes Tab
+- Lists quizzes with titles, subjects, dates, and status.
+- Actions: View, Edit, Delete quizzes.
+- **Future Enhancements:** Add sorting, filtering, and pagination.
+
+### 3️⃣ Create a Quiz Tab
+- Allows admins to create new quizzes:
+  - Enter Title, Description, Subject, Duration.
+  - Add multiple-choice questions.
+  - Save or Publish quizzes.
+- **Future Enhancements:** Add validation and CSV question uploads.
+
+## 📋 Tasks Completed Today:
+- Set up Admin Dashboard with React.
+- Developed tabs: **Home**, **Recent Quizzes**, **Create a Quiz**.
+- Implemented CRUD functionality for quizzes.
