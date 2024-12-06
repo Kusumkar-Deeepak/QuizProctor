@@ -176,3 +176,16 @@ On Day 4, we focused on building the student-side (client-side) functionality fo
 
 6. **Quiz Results Handling 📊:**
    - Implemented "View Scores" for quizzes that have ended.
+
+  
+## Additional Features 🔧
+- **Responsive Design 📱:** Fully responsive quiz access and submission.
+- **Error Handling & User Feedback ⚠️:** Smooth user experience with feedback messages.
+- **Data Persistence 💾:** Saved student responses and calculated scores.
+
+## Next Steps 🚀
+- Implement teacher-side functionality for quiz management.
+- Integrate real-time feedback for students.
+- Set up a database for storing quiz data and results.
+
+
