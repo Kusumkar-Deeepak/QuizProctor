@@ -72,18 +72,7 @@ QuizProctor is a web-based platform designed to facilitate secure MCQ (Multiple 
 
 ---
 
-## Journey of Building This Project
-
-### Day 1: 04/12/2024
-
-
-
-# 📚 Day 2: Admin Dashboard Development
-
-
-# QuizProctor Project
-
-## Journey of Building This Project
+## Journey of Building QuizProctor Project
 
 ### 📅 Day 1: 04/12/2024
 
