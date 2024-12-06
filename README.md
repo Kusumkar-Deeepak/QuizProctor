@@ -153,8 +153,26 @@ On **Day 2**, we developed the **Admin Dashboard** for the QuizProctor project. 
 
 ---
 
-### 📅 What's Next?
-- Focus on improving quiz performance tracking.
-- Implement additional features like user management, detailed quiz results, and analytics for quizzes.
-- Enhance user interface and experience for the admin dashboard.
+# 📚 Day 4 Progress - Quiz System Development 🎉
 
+## Overview 📝
+On Day 4, we focused on building the student-side (client-side) functionality for the quiz system. This included quiz access using tokens, quiz submission, end date validation, and more. The goal was to provide students with seamless access to quizzes and their results.
+
+## What We Accomplished ✅
+1. **Quiz Access with Tokens 🔑:**
+   - Students can access quizzes using a valid access token.
+   
+2. **Quiz Submission 📝:**
+   - Students can submit their answers and view results after submission.
+
+3. **End Date Validation ⏰:**
+   - Added logic to prevent submission if the quiz has ended.
+
+4. **User Interface Enhancements 💡:**
+   - Improved UI with countdowns, error handling, and success messages.
+
+5. **Quiz Timer ⏳:**
+   - Integrated a timer that automatically submits the quiz once time runs out.
+
+6. **Quiz Results Handling 📊:**
+   - Implemented "View Scores" for quizzes that have ended.
