@@ -165,6 +165,49 @@ exports.getQuizDetails = async (req, res) => {
   }
 };
 
+exports.validateToken = async (req, res) => {
+  try {
+    const { accessToken, quizLink } = req.body;
+
+    // Logging the incoming request payload
+    console.log("Incoming request:");
+    console.log("Access Token:", accessToken);
+    console.log("Quiz Link:", quizLink);
+
+    // Validate input
+    if (!accessToken || !quizLink) {
+      console.error("Validation error: Missing accessToken or quizLink.");
+      return res.status(400).json({ valid: false, message: "Access token and quiz link are required." });
+    }
+
+    // Logging before database query
+    console.log("Fetching quiz from database with link:", quizLink);
+
+    // Find quiz by link and validate token
+    const quiz = await Quiz.findOne({ quizLink: quizLink });
+
+    if (!quiz) {
+      console.error("Quiz not found for link:", quizLink);
+      return res.status(404).json({ valid: false, message: "Quiz not found." });
+    }
+
+    // Logging retrieved quiz details (excluding sensitive information)
+    console.log("Quiz retrieved from database:", { id: quiz._id, quizLink: quiz.quizLink });
+
+    if (quiz.accessToken === accessToken) {
+      console.log("Access token is valid for quiz:", quizLink);
+      return res.status(200).json({ valid: true, message: "Access token is valid." });
+    } else {
+      console.error("Invalid access token for quiz:", quizLink);
+      return res.status(401).json({ valid: false, message: "Invalid access token." });
+    }
+  } catch (error) {
+    console.error("Error validating access token:", error);
+    res.status(500).json({ valid: false, message: "Server error." });
+  }
+};
+
+
 
 // Submit quiz answers
 exports.submitQuizAnswers = async (req, res) => {
@@ -199,5 +242,71 @@ exports.submitQuizAnswers = async (req, res) => {
     res.json({ message: 'Quiz submitted successfully', score });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+exports.getQuizDetailsAndScores = async (req, res) => {
+  const { quizLink } = req.params; // Get the quizLink from the request parameters
+
+  try {
+    // Find the quiz by quizLink
+    const quiz = await Quiz.findOne({ quizLink });
+
+    if (!quiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+
+    // Send both quiz details and submissions (scores)
+    res.status(200).json({
+      quiz: {
+        title: quiz.title,
+        teacherName: quiz.teacherName,
+        startTime: quiz.startTime,
+        endTime: quiz.endTime,
+      },
+      submissions: quiz.submissions,
+    });
+  } catch (error) {
+    console.error("Error fetching quiz details or scores:", error);
+    res.status(500).json({ message: "Server error, please try again later" });
+  }
+};
+exports.endQuiz = async (req, res) => {
+  try {
+    // Log the incoming request body
+    console.log("Received request body:", req.body);
+
+    const { title, endTime } = req.body; // Get quiz title and endTime from request body
+
+    // Log the received title and endTime
+    console.log(`Ending quiz: ${title} at ${endTime}`);
+
+    // Find the quiz by its title
+    const quiz = await Quiz.findOne({ title: title });
+
+    // Log the result of the quiz search
+    if (!quiz) {
+      console.log(`Quiz not found with title: ${title}`);
+      return res.status(404).json({ message: "Quiz not found" });
+    } else {
+      console.log(`Quiz found: ${quiz}`);
+    }
+
+    // Update the endTime for the quiz
+    quiz.endTime = endTime;
+
+    // Log the updated quiz object before saving
+    console.log("Updated quiz object:", quiz);
+
+    await quiz.save();
+
+    // Log the success message
+    console.log("Quiz ended successfully, updated quiz:", quiz);
+
+    res.status(200).json({ message: "Quiz ended successfully", quiz });
+  } catch (error) {
+    // Log the error for better insight into the issue
+    console.error("Error ending quiz:", error);
+    res.status(500).json({ message: "Error ending quiz", error });
   }
 };
