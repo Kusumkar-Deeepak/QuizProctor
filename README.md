@@ -74,7 +74,7 @@ QuizProctor is a web-based platform designed to facilitate secure MCQ (Multiple 
 
 ## Journey of Building QuizProctor Project
 
-### 📅 Day 1: 04/12/2024
+### 📅 Day 1 Progress - 04/12/2024
 
 **1) Documentation and Planning** 📑  
 On Day 1, we focused on gathering all the necessary information and laying out the foundation for the project. No coding was done on this day; instead, we focused on documentation and planning the structure of the project. The goal was to have a clear roadmap for the upcoming days. Key activities included:
@@ -94,7 +94,7 @@ This foundational work was crucial for ensuring a smooth development process in 
 
 ---
 
-### 📚 Day 2: 05/12/2024
+### 📚 Day 2 Progress - 05/12/2024
 
 ## 🛠️ Features Implemented
 
@@ -121,7 +121,7 @@ These improvements mark the foundational work for the project, ensuring a solid 
 
 ---
 
-### 📚 Day 3: 06/12/2024
+### 📚 Day 3 Progress - 06/12/2024
 
 ## 🛠️ Features Implemented
 
@@ -153,7 +153,9 @@ On **Day 2**, we developed the **Admin Dashboard** for the QuizProctor project. 
 
 ---
 
-# 📚 Day 4 Progress - Quiz System Development 🎉
+# 📚 Day 4 Progress - 07/12/2024
+
+### Quiz System Development 🎉
 
 ## Overview 📝
 On Day 4, we focused on building the student-side (client-side) functionality for the quiz system. This included quiz access using tokens, quiz submission, end date validation, and more. The goal was to provide students with seamless access to quizzes and their results.
