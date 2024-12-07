@@ -121,32 +121,37 @@ const QuizComponent = () => {
         toast.warn("Please answer all questions before submitting.");
         return;
       }
-
+  
       const payload = {
         studentName: studentInfo.name,
         studentEmail: studentInfo.email,
         answers,
       };
-
+  
       const response = await axios.post(
         `${API_BASE_URL}/submit/${quizLink}`,
         payload
       );
-
-      const intervalId = setInterval(() => {
-        navigate("/response");
-        clearInterval(intervalId); // Stop the interval after redirection
-      }, 1000); // Redirect after 1 second
+  
+      // Navigate to ThankYouComponent with quiz details
+      navigate("/response", {
+        state: {
+          quizTitle: quiz.title,
+          studentName: studentInfo.name,
+          submittedAt: new Date().toLocaleString(),
+        },
+      });
     } catch (error) {
       const errorMessage =
         error.response && error.response.data && error.response.data.message
           ? error.response.data.message
           : "Failed to submit quiz. Please try again.";
-
+  
       toast.error(errorMessage);
       console.error("Error submitting quiz:", error);
     }
   };
+  
 
   if (quizClosed) {
     return (

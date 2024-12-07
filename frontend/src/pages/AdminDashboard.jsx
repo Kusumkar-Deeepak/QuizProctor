@@ -12,8 +12,8 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const { admin, updateAdmin } = useAdminContext(); // Extract admin data from context
   const { fullName, email } = admin || {}; // Use default empty object in case admin is null or undefined
-
   const [isQuizCreating, setIsQuizCreating] = useState(false); // State to toggle CreateQuizTab visibility
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,11 +21,23 @@ const AdminDashboard = () => {
     const adminData = JSON.parse(localStorage.getItem("adminData"));
 
     if (!token || !adminData || adminType !== "admin") {
-      navigate("/admin-login"); // Redirect to login if conditions are not met
-    } else {
-      updateAdmin(adminData); // If valid, update context with the admin data from localStorage
+      if (!isSigningOut) {
+        navigate("/login");
+      }
+    } else if (!admin || admin !== adminData) {
+      updateAdmin(adminData); // Only call updateAdmin if the admin data has changed
     }
-  }, [navigate, updateAdmin]);
+  }, [updateAdmin, isSigningOut, admin, navigate]);
+
+  const handleSignOut = () => {
+    // Clear localStorage and prevent unnecessary redirects
+    localStorage.removeItem("token");
+    localStorage.removeItem("admin");
+    localStorage.removeItem("adminData");
+
+    setIsSigningOut(true); // Set the flag to prevent useEffect redirect
+    navigate("/"); // Navigate to the home page
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
@@ -107,8 +119,7 @@ const AdminDashboard = () => {
           <Tab.Panels className="mt-4">
             {/* Home Tab */}
             <Tab.Panel>
-              <HomeTab fullName={fullName} />{" "}
-              {/* Replace with HomeTab component */}
+              <HomeTab fullName={fullName} />
             </Tab.Panel>
 
             {/* Recent Quizzes Tab */}
@@ -149,15 +160,7 @@ const AdminDashboard = () => {
       {/* Sign Out Button */}
       <div className="fixed bottom-4 right-4">
         <Button
-          onClick={() => {
-            // Remove the token and admin data from localStorage
-            localStorage.removeItem("token");
-            localStorage.removeItem("admin");
-            localStorage.removeItem("adminData");
-
-            // Redirect to home page
-            navigate("/"); // This will navigate to the home page
-          }}
+          onClick={handleSignOut}
           className="w-full sm:w-auto py-2 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-400"
         >
           Sign Out

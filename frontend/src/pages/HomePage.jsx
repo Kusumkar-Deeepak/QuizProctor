@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+// import { useState } from "react";
 import { Navbar, Button, Card } from "flowbite-react";
 // import { SunIcon, MoonIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,12 @@ import DarkToggler from "../components/DarkToggler";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  // State to handle mobile menu open/close
+  // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleButton = () => {
+    navigate("/learn-more");
+  }
 
   const handleNavigate = () => {
     navigate("/register");
@@ -18,29 +24,26 @@ const HomePage = () => {
     <div className="min-h-screen">
       {/* Navbar */}
       <Navbar
-        fluid
-        className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 py-4 px-8"
-      >
-        <div className="container mx-auto flex justify-between items-center">
-          {/* Left Section: Project Name */}
-          <Navbar.Brand href="/">
-            <span className="text-3xl font-extrabold dark:text-white">
-              QuizProctor
-            </span>
-          </Navbar.Brand>
+  fluid
+  className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 py-4 px-4 sm:px-8"
+>
+  <div className="container mx-auto flex justify-between items-center">
+    {/* Left Section: Project Name */}
+    <a
+      href="/"
+      className="text-2xl sm:text-3xl font-extrabold dark:text-white"
+    >
+      QuizProctor
+    </a>
 
-          {/* Right Section: Contact Us and Dark Mode Toggle */}
-          <div className="flex items-center space-x-6">
-            <a
-              href="#contact"
-              className="text-lg text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-medium"
-            >
-              Contact Us
-            </a>
-            <DarkToggler />
-          </div>
-        </div>
-      </Navbar>
+    {/* Right Section */}
+    <div className="flex items-center">
+      {/* Dark Mode Toggler */}
+      <DarkToggler />
+    </div>
+  </div>
+</Navbar>
+
 
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center px-4 py-32 min-h-[70vh] text-center bg-white dark:bg-gray-900">
@@ -63,6 +66,7 @@ const HomePage = () => {
           </Button>
           {/* Learn More Button */}
           <Button
+          onClick={handleButton}
             color="light"
             className="px-6 py-3 text-lg bg-white text-gray-900 border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 hover:bg-gray-100 hover:border-gray-400 dark:hover:bg-gray-700 dark:hover:border-gray-600"
           >
@@ -141,9 +145,7 @@ const HomePage = () => {
       <footer className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-4">
         <div className="container mx-auto text-center">
           <p>&copy; 2024 Deepak Kusumkar. All rights reserved.</p>
-          <p>
-            This Project Is a Part of My Web Developement Journey!
-          </p>
+          <p>This Project Is a Part of My Web Developement Journey!</p>
         </div>
       </footer>
     </div>
