@@ -7,6 +7,7 @@ const CreateQuizTab = () => {
   const [quizData, setQuizData] = useState({
     title: "",
     description: "",
+    email: "",
     duration: "",
     teacherName: "",
     subject: "",
@@ -66,6 +67,7 @@ const CreateQuizTab = () => {
     if (
       !quizData.title ||
       !quizData.description ||
+      !quizData.email ||
       !quizData.duration ||
       !quizData.teacherName ||
       !quizData.subject ||
@@ -178,6 +180,21 @@ const CreateQuizTab = () => {
             onChange={handleQuizChange}
             className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100"
             placeholder="Enter quiz duration"
+          />
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={quizData.email}
+            onChange={handleQuizChange}
+            className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100"
+            placeholder="Enter Teacher Email"
           />
         </div>
 

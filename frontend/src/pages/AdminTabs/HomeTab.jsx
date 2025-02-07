@@ -8,12 +8,17 @@ const HomeTab = ({ fullName }) => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const API_BASE_URL_FRONTEND = import.meta.env.VITE_API_BASE_URL_FRONTEND;
 
+  // Retrieve logged-in teacher's email from localStorage
+  const adminData = JSON.parse(localStorage.getItem("adminData"));
+  const teacherEmail = adminData?.email;
+
   useEffect(() => {
+    if (!teacherEmail) return; // Prevent unnecessary API calls
+
     const fetchQuizzes = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/quizzes`);
-        const quizzes = response.data;
-        const sortedQuizzes = quizzes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const response = await axios.get(`${API_BASE_URL}/quizzes?email=${teacherEmail}`);
+        const sortedQuizzes = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setQuizzes(sortedQuizzes);
         if (sortedQuizzes.length > 0) {
           setRecentQuiz(sortedQuizzes[0]);
@@ -24,7 +29,7 @@ const HomeTab = ({ fullName }) => {
     };
 
     fetchQuizzes();
-  }, []);
+  }, [teacherEmail]);
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">

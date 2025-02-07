@@ -7,25 +7,27 @@ const RecentQuizzes = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const API_BASE_URL_FRONTEND = import.meta.env.VITE_API_BASE_URL_FRONTEND;
 
-  // Fetch all quizzes when the component mounts
+  // Retrieve teacher's email from local storage
+  const adminData = JSON.parse(localStorage.getItem("adminData"));
+  const teacherEmail = adminData?.email;
+
   useEffect(() => {
+    if (!teacherEmail) return; // Prevent unnecessary API calls
+
     const fetchQuizzes = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/quizzes`);
-        console.log(response.data); // Log quiz data
-        setQuizzes(response.data); // Set the fetched quizzes in state
+        const response = await axios.get(`${API_BASE_URL}/quizzes?email=${teacherEmail}`);
+        setQuizzes(response.data);
       } catch (error) {
         console.error("Error fetching quizzes:", error);
       }
     };
 
     fetchQuizzes();
-  }, []);
+  }, [teacherEmail]);
 
-  // Helper function to format date in a professional way
-  const formatDate = (date) => {
-    return format(new Date(date), "MM/dd/yyyy, hh:mm a");
-  };
+  const formatDate = (date) => format(new Date(date), "MM/dd/yyyy, hh:mm a");
+
 
   // Function to handle ending a quiz
 const handleEndQuiz = async (quizTitle) => {

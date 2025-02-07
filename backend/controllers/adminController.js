@@ -95,46 +95,69 @@ exports.loginAdmin = async (req, res) => {
   }
 };
 
-// Create a new quiz
 exports.createQuiz = async (req, res) => {
   try {
-    // Generate a unique quiz URL slug
-    const quizLink = uuidv4(); // Generate a unique link
+    const { title, description, duration, questions, startTime, endTime, email, teacherName, subject, accessToken } = req.body;
+    console.log(req.body)
 
-    // Create a new quiz with a unique link
+    if (!email) {
+      return res.status(400).json({ message: "Teacher email is required." });
+    }
+
+    // Generate a unique quiz link
+    const quizLink = uuidv4();
+
+    // Create and save the new quiz
     const quiz = new Quiz({
-      ...req.body,
-      quizLink, // Store the unique link
+      title,
+      description,
+      duration,
+      startTime,
+      endTime,
+      email, // Directly from the frontend
+      teacherName,
+      subject,
+      accessToken,
+      questions,
+      quizLink, // Unique quiz link
+      createdAt: new Date(),
     });
 
-    // Save the quiz to the database
     await quiz.save();
-
-    // Send the quiz link in the response
+    console.log("sucess")
     res.status(201).json({
-      message: 'Quiz created successfully',
+      message: "Quiz created successfully",
       quiz: {
         ...quiz.toObject(),
-        link: `${process.env.API_BASE_URL}/quiz/${quizLink}`, // Construct the full URL
+        link: `${process.env.API_BASE_URL}/quiz/${quizLink}`,
       },
     });
   } catch (error) {
-    console.error('Error creating quiz:', error);
-    res.status(500).json({ message: 'Error creating quiz', error });
+    console.error("Error creating quiz:", error);
+    res.status(500).json({ message: "Error creating quiz", error });
   }
 };
 
-// Fetch all quizzes
+
 exports.getAllQuizzes = async (req, res) => {
   try {
-    // Fetch quizzes from the database
-    const quizzes = await Quiz.find().sort({ createdAt: -1 }); // Sort by most recent quiz
-    res.status(200).json(quizzes); // Return the quizzes as JSON
+    const email = req.query.email; // Get email from the frontend request
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required to fetch quizzes" });
+    }
+
+    // Fetch only quizzes created by the provided email
+    const quizzes = await Quiz.find({ email }).sort({ createdAt: -1 });
+
+    res.status(200).json(quizzes);
   } catch (error) {
-    console.error('Error fetching quizzes:', error);
-    res.status(500).json({ message: 'Error fetching quizzes', error });
+    console.error("Error fetching quizzes:", error);
+    res.status(500).json({ message: "Error fetching quizzes", error });
   }
 };
+
+
 
 // Get quiz details
 exports.getQuizDetails = async (req, res) => {
