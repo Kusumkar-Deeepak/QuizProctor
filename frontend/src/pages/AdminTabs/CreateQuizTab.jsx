@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "flowbite-react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify"; // Import react-toastify
 
 const CreateQuizTab = () => {
+  const [blink, setBlink] = useState(true);
   const [quizData, setQuizData] = useState({
     title: "",
     description: "",
@@ -15,6 +16,16 @@ const CreateQuizTab = () => {
     startTime: "",
     endTime: "",
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBlink((prev) => !prev);
+    }, 900); // Toggle visibility every 500ms
+
+    return () => clearInterval(interval);
+  }, []);
+
+  
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [questions, setQuestions] = useState([
@@ -185,18 +196,25 @@ const CreateQuizTab = () => {
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={quizData.email}
-            onChange={handleQuizChange}
-            className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100"
-            placeholder="Enter Teacher Email"
-          />
-        </div>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        Email
+      </label>
+      <input
+        type="email"
+        name="email"
+        value={quizData.email}
+        onChange={handleQuizChange}
+        className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100"
+        placeholder="Enter Teacher Email"
+      />
+      <p
+        className={`mt-1 text-xs text-red-500 ${
+          blink ? "opacity-100" : "opacity-0"
+        } transition-opacity duration-500`}
+      >
+        Use the email you registered with [Also displyed at the top]
+      </p>
+    </div>
 
         {/* Teacher Name */}
         <div>

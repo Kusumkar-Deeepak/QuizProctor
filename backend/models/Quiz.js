@@ -6,7 +6,7 @@ const quizSchema = new mongoose.Schema({
   description: { type: String, required: true },
   duration: { type: Number, required: true },
   teacherName: { type: String, required: true },
-  email: { type: String, required: true, unique: true, lowercase: true},
+  email: { type: String, required: true, lowercase: true},
   subject: { type: String, required: true },
   accessToken: { type: String, required: true },
   startTime: { type: Date, required: true },
