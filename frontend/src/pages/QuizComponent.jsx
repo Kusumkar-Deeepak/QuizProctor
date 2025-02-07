@@ -18,6 +18,7 @@ const QuizComponent = () => {
   const [quizClosed, setQuizClosed] = useState(false); // New state to track if quiz is closed
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  console.log(API_BASE_URL, "Hi i am under water")
 
   // Fetch quiz details after access token validation
   const fetchQuizDetails = async () => {
@@ -25,6 +26,7 @@ const QuizComponent = () => {
       const response = await axios.get(`${API_BASE_URL}/quiz/${quizLink}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
+      
 
       setQuiz(response.data);
       setAnswers(new Array(response.data.questions.length).fill(""));

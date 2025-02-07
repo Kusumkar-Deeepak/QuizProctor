@@ -21,7 +21,7 @@ function App() {
           <Route path="/quiz/:quizLink" element={<QuizComponent />} />
           <Route path="/response" element={<ThankYouComponent />} />
           <Route path="/view-scores/:quizLink" element={<ViewScores />} />
-          <Route path="//learn-more" element={<LearnMore />} />
+          <Route path="/learn-more" element={<LearnMore />} />
         </Routes>
       </Router>
     </AdminProvider>
