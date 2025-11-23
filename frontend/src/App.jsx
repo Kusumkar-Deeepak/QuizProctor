@@ -7,7 +7,7 @@ import AdminDashboard from './pages/AdminDashboard'; // Assuming you have this f
 import QuizComponent from './pages/QuizComponent';
 import ThankYouComponent from './pages/ThankYouComponent';
 import ViewScores from './pages/ViewScores';
-import LearnMore from './pages/LearnMore';
+// import LearnMore from './pages/LearnMore';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route path="/quiz/:quizLink" element={<QuizComponent />} />
           <Route path="/response" element={<ThankYouComponent />} />
           <Route path="/view-scores/:quizLink" element={<ViewScores />} />
-          <Route path="/learn-more" element={<LearnMore />} />
+          {/* <Route path="/learn-more" element={<LearnMore />} /> */}
         </Routes>
       </Router>
     </AdminProvider>
