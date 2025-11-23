@@ -142,12 +142,12 @@ const HomePage = () => {
       <hr />
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-4">
+      {/* <footer className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-4">
         <div className="container mx-auto text-center">
           <p>&copy; 2024 Deepak Kusumkar. All rights reserved.</p>
           <p>This Project Is a Part of My Web Developement Journey!</p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
